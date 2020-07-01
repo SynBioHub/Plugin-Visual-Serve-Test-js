@@ -5,6 +5,7 @@ const path = require('path');
 const port = 5000
 
 app.use(express.json());
+app.use(express.static("public"));
 
 app.get('/download', function (req, res) {
 	let file_path = path.join(__dirname, "DownloadTest.html")
@@ -30,15 +31,18 @@ app.post('/Evaluate', function (req, res) {
 })
 
 app.post('/Run', function (req, res) {
+	html_read = `<!doctype html>
+	<html>
+	<head><title>sequence view</title></head>
+	<body>
+	<div id="reactele"></div>
+	<img src="http://${hostAddr}/sucess.jpg" alt="Sucess">      
+	</body>
+	</html>
+	`;
 	
-	//read in html and substitute in the values extracted from the request above
-	//fs.readFile('StatusTest.html', function(err, data) {
-	//	let html_read = data.toString()
-	//	html_read = html_read.replace(/<Hello>/g,"hi");
-	//	
-	//	//return html
-	//	res.send(html_read)
-	//});
+	res.send(html_read)
+	
 })
 
 app.listen(port, () => console.log(`Test Visualisation app is listening at http://localhost:${port}`))
