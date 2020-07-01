@@ -16,10 +16,9 @@ app.get('/Status', function (req, res) {
 	//read in html and substitute in the values extracted from the request above
 	fs.readFile('StatusTest.html', function(err, data) {
 		let host_path = req.header('Host')
-		host_path = host_path + "/download"
+		host_path = "http://"+ host_path + "/download"
 		let html_read = data.toString()
 		html_read = html_read.replace(/URL_REPLACE/g, host_path);
-		//html_read = html_read.replace(/URL_REPLACE/g, "http://localhost:5000/download");
 		
 		//return html
 		res.send(html_read)
