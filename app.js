@@ -23,8 +23,7 @@ http.createServer(function(request, response) {
     // We replaced all the event handlers with a simple call to readStream.pipe()
     readStream.pipe(res);
 })
-.listen(2000);
-})
+
 
 app.get('/Status', function (req, res) {
 	res.status(200).send('The plugin is up and running')
