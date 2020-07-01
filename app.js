@@ -16,9 +16,9 @@ app.get('/Serve', function (req, res) {
         'Content-Length': stat.size
     });
 
-    const readStream = fs.createReadStream(filePath);
+    //const readStream = fs.createReadStream(filePath);
     // We replaced all the event handlers with a simple call to readStream.pipe()
-    readStream.pipe(res);
+    //readStream.pipe(res);
 })
 
 
