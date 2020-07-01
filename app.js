@@ -7,7 +7,7 @@ const port = 5000
 
 app.use(express.json());
 
-app.get('/Status', function (req, res) {
+app.get('/Serve', function (req, res) {
 
 
 http.createServer(function(request, response) {
