@@ -19,7 +19,7 @@ app.get('/Status', function (req, res) {
 	fs.readFile('StatusTest.html', function(err, data) {
 		let x = os.hostname();
 		let html_read = data.toString()
-		html_read = html_read.replace(/URL_REPLACE/g, req.header('User-Agent'));
+		html_read = html_read.replace(/URL_REPLACE/g, req.header('Host'));
 		html_read = html_read.replace(/endpoint/g, x);
 		//html_read = html_read.replace(/URL_REPLACE/g, "http://localhost:5000/download");
 		
