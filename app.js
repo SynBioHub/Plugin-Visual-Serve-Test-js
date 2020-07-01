@@ -1,9 +1,30 @@
 const express = require('express')
 const fs = require('fs');
 const app = express();
+const http = require('http');
+const path = require('path');
 const port = 5000
 
 app.use(express.json());
+
+app.get('/Status', function (req, res) {
+
+
+http.createServer(function(request, response) {
+    const filePath = path.join(__dirname, 'Test.html');
+    const stat = fs.statSync(filePath);
+
+    res.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Content-Length': stat.size
+    });
+
+    const readStream = fs.createReadStream(filePath);
+    // We replaced all the event handlers with a simple call to readStream.pipe()
+    readStream.pipe(res);
+})
+.listen(2000);
+})
 
 app.get('/Status', function (req, res) {
 	res.status(200).send('The plugin is up and running')
