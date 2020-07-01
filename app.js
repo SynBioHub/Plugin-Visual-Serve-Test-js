@@ -17,7 +17,7 @@ app.get('/Status', function (req, res) {
 	//read in html and substitute in the values extracted from the request above
 	fs.readFile('StatusTest.html', function(err, data) {
 		let html_read = data.toString()
-		html_read = html_read.replace(/URL_REPLACE/g, "https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields");
+		html_read = html_read.replace(/URL_REPLACE/g, "http://localhost:5000/download");
 		
 		//return html
 		res.send(html_read)
