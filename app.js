@@ -8,9 +8,6 @@ const port = 5000
 app.use(express.json());
 
 app.get('/Serve', function (req, res) {
-
-
-http.createServer(function(request, response) {
     const filePath = path.join(__dirname, 'Test.html');
     const stat = fs.statSync(filePath);
 
