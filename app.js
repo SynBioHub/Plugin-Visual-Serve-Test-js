@@ -5,7 +5,7 @@ const path = require('path');
 const port = 5000
 
 app.use(express.json());
-app.use(express.static(__dirname + "public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get('/download', function (req, res) {
 	let file_path = path.join(__dirname, "DownloadTest.html")
