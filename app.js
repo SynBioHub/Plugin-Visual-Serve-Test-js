@@ -5,7 +5,11 @@ const path = require('path');
 const port = 5000
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+//app.use(express.static(path.join(__dirname, "public")));
+
+app.get('/success.jpg', function (req, res){
+	res.sendFile(path.join(__dirname, 'public', 'success.jpg'));
+})
 
 app.get('/download', function (req, res) {
 	let file_path = path.join(__dirname, "DownloadTest.html")
