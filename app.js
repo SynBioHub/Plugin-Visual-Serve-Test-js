@@ -31,6 +31,7 @@ app.post('/Evaluate', function (req, res) {
 })
 
 app.post('/Run', function (req, res) {
+	let hostAddr = req.get('host')
 	html_read = `<!doctype html>
 	<html>
 	<head><title>sequence view</title></head>
