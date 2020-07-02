@@ -7,7 +7,7 @@ const port = 5000
 app.use(express.json());
 //app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/success.jpg', function (req, res){
+app.get('/public/success.jpg', function (req, res){
 	res.sendFile(path.join(__dirname, 'public', 'success.jpg'));
 })
 
