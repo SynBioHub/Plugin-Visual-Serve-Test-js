@@ -7,7 +7,7 @@ const port = 5000
 app.use(express.json());
 //app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/public/success.jpg', function (req, res){
+app.get('/success.jpg', function (req, res){
 	res.sendFile(path.join(__dirname, 'public', 'success.jpg'));
 })
 
@@ -41,7 +41,7 @@ app.post('/Run', function (req, res) {
 	<head><title>sequence view</title></head>
 	<body>
 	<div id="reactele"></div>
-	<img src="http://${hostAddr}/sucess.jpg" alt="Success">      
+	<img src="http://${hostAddr}/success.jpg" alt="Success">      
 	</body>
 	</html>
 	`;
