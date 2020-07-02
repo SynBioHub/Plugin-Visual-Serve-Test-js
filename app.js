@@ -36,12 +36,14 @@ app.post('/Evaluate', function (req, res) {
 
 app.post('/Run', function (req, res) {
 	let hostAddr = req.get('host')
+	//<img src="http://${hostAddr}/success.jpg" alt="Success">
 	html_read = `<!doctype html>
 	<html>
 	<head><title>sequence view</title></head>
 	<body>
 	<div id="reactele"></div>
-	<img src="http://${hostAddr}/success.jpg" alt="Success">      
+	<img src="http://localhost:8080/success.jpg" alt="Success">
+	<p>${hostAddr}</p>
 	</body>
 	</html>
 	`;
