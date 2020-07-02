@@ -5,7 +5,7 @@ const path = require('path');
 const port = 5000
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(__dirname + "public"));
 
 app.get('/download', function (req, res) {
 	let file_path = path.join(__dirname, "DownloadTest.html")
@@ -37,7 +37,7 @@ app.post('/Run', function (req, res) {
 	<head><title>sequence view</title></head>
 	<body>
 	<div id="reactele"></div>
-	<img src="http://${hostAddr}/sucess.jpg" alt="Sucess">      
+	<img src="http://${hostAddr}/sucess.jpg" alt="Success">      
 	</body>
 	</html>
 	`;
