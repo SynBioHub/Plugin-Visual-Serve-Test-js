@@ -3,9 +3,7 @@ version: '3.7'
 services:
   servlet:
     container_name: servlet
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: synbiohub/plugin-visualisation-test:snapshot
     volumes:
       - '.:/public'
     ports:
