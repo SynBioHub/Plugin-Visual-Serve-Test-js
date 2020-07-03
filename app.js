@@ -42,7 +42,7 @@ app.post('/Run', function (req, res) {
 	<head><title>sequence view</title></head>
 	<body>
 	<div id="reactele"></div>
-	<img src="http://localhost:8080/success.jpg" alt="Success">
+	<img src="http://localhost:8086/success.jpg" alt="Success">
 	<p>Host addres: ${hostAddr}</p>
 	</body>
 	</html>
