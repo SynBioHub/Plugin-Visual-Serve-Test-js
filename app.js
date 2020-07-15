@@ -44,7 +44,7 @@ app.post('/Run', function (req, res) {
 	<body>
 	<div id="reactele"></div>
 	<img src="http://localhost:8086/success.jpg" alt="Success">
-	<p>Host addres: ${hostAddr}</p>
+	<p>Host address: ${hostAddr}</p>
 	</body>
 	</html>
 	`;
