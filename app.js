@@ -36,6 +36,7 @@ app.post('/Evaluate', function (req, res) {
 
 app.post('/Run', function (req, res) {
 	let hostAddr = req.get('host')
+	//this works if you can access the plugin via an exposed port on the internet. Note that for synbiohub it must be https
 	//<img src="http://${hostAddr}/success.jpg" alt="Success">
 	html_read = `<!doctype html>
 	<html>
