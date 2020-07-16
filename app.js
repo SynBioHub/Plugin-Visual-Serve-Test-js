@@ -7,8 +7,13 @@ const port = 5000
 app.use(express.json());
 //app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/success.jpg', function (req, res){
-	res.sendFile(path.join(__dirname, 'public', 'success.jpg'));
+app.get('/public/:file_name', function (req, res){
+	let file_path = path.join(__dirname, 'public', req.params.file_name)
+	res.sendFile(file_path,function(err){
+		if(err){
+			res.send('The this file ('+req.params.file_name +') does not exist');
+			}
+		});
 })
 
 app.get('/download', function (req, res) {
@@ -37,13 +42,13 @@ app.post('/Evaluate', function (req, res) {
 app.post('/Run', function (req, res) {
 	let hostAddr = req.get('host')
 	//this works if you can access the plugin via an exposed port on the internet. Note that for synbiohub it must be https
-	//<img src="http://${hostAddr}/success.jpg" alt="Success">
+	//<img src="http://${hostAddr}/public/success.jpg" alt="Success">
 	html_read = `<!doctype html>
 	<html>
 	<head><title>sequence view</title></head>
 	<body>
 	<div id="reactele"></div>
-	<img src="http://localhost:8086/success.jpg" alt="Success">
+	<img src="http://localhost:8086/public/success.jpg" alt="Success">
 	<p>Host address: ${hostAddr}</p>
 	</body>
 	</html>
