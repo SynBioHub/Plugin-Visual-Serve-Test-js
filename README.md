@@ -1,5 +1,5 @@
 # Plugin-Serve-Test-js
-A small test plugin to test the visualisation interface is working for SynBioHub. Could be the basis for javascript (Node.js) based visualisation plugins.
+A small test plugin to test the server interface is working for SynBioHub. Could be the basis for javascript (Node.js) based server plugins.
 
 # Install
 ## Using docker
