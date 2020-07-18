@@ -36,7 +36,18 @@ app.get('/Status', function (req, res) {
 })
 
 app.post('/Evaluate', function (req, res) {
-	res.status(200).send('The app can handle this input')
+	var data =  JSON.stringify(req.body)
+	var rdf_type = req.body.type.toString()
+	
+	////////REPLACE THIS SECTION WITH OWN RUN CODE ////////////
+	acceptable = true
+	//////////////////END SECTION//////////////////////////////
+	
+	if (acceptable) {
+		res.status(200).send(`The type sent (${rdf_type}) is an accepted type`);
+	} else {
+		res.status(415).send(`The type sent (${rdf_type}) is NOT an accepted type`);
+	};
 })
 
 app.post('/Run', function (req, res) {
@@ -58,4 +69,4 @@ app.post('/Run', function (req, res) {
 	
 })
 
-app.listen(port, () => console.log(`Test Visualisation app is listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`Test Serve app is listening at http://localhost:${port}`))
