@@ -51,22 +51,39 @@ app.post('/Evaluate', function (req, res) {
 })
 
 app.post('/Run', function (req, res) {
-	let hostAddr = req.get('host')
-	//this works if you can access the plugin via an exposed port on the internet. Note that for synbiohub it must be https
-	//<img src="http://${hostAddr}/public/success.jpg" alt="Success">
-	html_read = `<!doctype html>
+	let hostHeader = req.get('host');
+	let hostAddr;
+
+	// determine SEQVIZ script URL (respect SERVER_HOST env override)
+	const overrideHost = process.env.SERVER_HOST;
+	if (overrideHost) {
+		const o = overrideHost.replace(/\/+$/,''); // strip trailing slashes
+		if (o.startsWith('http://') || o.startsWith('https://')) {
+			hostAddr = o;
+		} else {
+			hostAddr = 'http://' + o;
+		}
+	} else {
+		hostAddr = 'http://' + hostHeader;
+	}
+
+	// this works if you can access the plugin via an exposed port on the internet.
+	// Note that for synbiohub it must be https
+	// <img src="http://${hostAddr}/public/success.jpg" alt="Success">
+	const html_read = `<!doctype html>
 	<html>
-	<head><title>sequence view</title></head>
+	<head><title>sequence view</title>
+	<script src="${hostAddr + '/seqviz.js'}"></script></head>
 	<body>
 	<div id="reactele"></div>
-	<img src="http://localhost:8086/public/success.jpg" alt="Success">
+	<img src="${hostAddr + '/public/success.jpg'}" alt="Success">
 	<p>Host address: ${hostAddr}</p>
 	</body>
 	</html>
 	`;
-	
-	res.send(html_read)
-	
+
+	res.send(html_read);
+
 })
 
 app.listen(port, () => console.log(`Test Serve app is listening at http://localhost:${port}`))
