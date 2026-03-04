@@ -2,7 +2,10 @@ const express = require('express')
 const fs = require('fs');
 const app = express();
 const path = require('path');
+const http = require('http');
+const https = require('https');
 const port = 5000
+
 
 app.use(express.json());
 //app.use(express.static(path.join(__dirname, "public")));
@@ -50,9 +53,36 @@ app.post('/Evaluate', function (req, res) {
 	};
 })
 
-app.post('/Run', function (req, res) {
+app.post('/Run', async function (req, res) {
 	let hostHeader = req.get('host');
 	let hostAddr;
+
+
+	var complete_sbol = req.body.complete_sbol.toString();
+	var url = complete_sbol.replace("/sbol", "");
+	var token = (typeof req.body.token === 'undefined' || req.body.token === null) ? undefined : req.body.token.toString();
+
+	var tokenVal = (typeof token === 'undefined' || token === null) ? 'null' : token;
+		var headers = { 'Accept': 'text/plain' };
+		if (tokenVal !== 'null') {
+			headers['X-authorization'] = tokenVal;
+		}
+
+		var responseStatusCode = 'ERROR';
+		if (typeof fetch === 'function') {
+			var response = await fetch(url, { method: 'GET', headers: headers });
+			responseStatusCode = response.status;
+		} else {
+			// Fallback for older Node: use http/https without changing control flow elsewhere.
+			responseStatusCode = await new Promise(function(resolve) {
+				var client = url.startsWith('https://') ? https : http;
+				var req2 = client.get(url, { headers: headers }, function(r) {
+					r.on('data', function(){});
+					r.on('end', function(){ resolve(r.statusCode); });
+				});
+				req2.on('error', function(){ resolve('ERROR'); });
+			});
+		}
 
 	// determine SEQVIZ script URL (respect SERVER_HOST env override)
 	const overrideHost = process.env.SERVER_HOST;
@@ -75,6 +105,7 @@ app.post('/Run', function (req, res) {
 	<head><title>sequence view</title>
 	<script src="${hostAddr + '/seqviz.js'}"></script></head>
 	<body>
+	<p>Response from ${url}: ${responseStatusCode}</p>
 	<div id="reactele"></div>
 	<img src="${hostAddr + '/public/success.jpg'}" alt="Success">
 	<p>Host address: ${hostAddr}</p>
